@@ -10,9 +10,9 @@ const docClient = new dynamodb.DocumentClient();
 /**
  * A simple example includes a HTTP get method to get one item by id from a DynamoDB table.
  */
-exports.getByIdHandler = async (event) => {
-  if (event.httpMethod !== 'GET') {
-    throw new Error(`getMethod only accept GET method, you tried: ${event.httpMethod}`);
+exports.deleteByIdHandler = async (event) => {
+  if (event.httpMethod !== 'DELETE') {
+    throw new Error(`getMethod only accept DELETE method, you tried: ${event.httpMethod}`);
   }
   // All log statements are written to CloudWatch
   console.info('received:', event);
@@ -26,7 +26,7 @@ exports.getByIdHandler = async (event) => {
     TableName : tableName,
     Key: { character_id: character_id },
   };
-  const data = await docClient.get(params).promise();
+  const data = await docClient.delete(params).promise();
   const item = data.Item;
  
   const response = {
